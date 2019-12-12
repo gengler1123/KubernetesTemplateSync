@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+
+  db:
+    build: db
+    image: gengler1123/template_psql
+
+  orchestrator:
+    build: orchestrator
+    image: gengler1123/template_orchestrator
+    deploy:
+      replicas: 5
+
+  service_01:
+    build: service_01
+    image: gengler1123/template_service_01
+    ports:
+     - "8080:80"
+
+  service_02:
+    build: service_02
+    image: gengler1123/template_service_02
+    ports:
+      - "8080:80"
