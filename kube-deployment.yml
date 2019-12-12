@@ -136,6 +136,11 @@ spec:
       - name: orch
         image: gengler1123/template_orchestrator
         imagePullPolicy: Always
+        env:
+          - name: service_01
+            value: "http://service-01:8000"
+          - name: service_02
+            value: "http://service-02:8000"
         ports:
         - containerPort: 8000
           name: orch-api

@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9c86258-97d8-43f4-b415-cf6b1865c644" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DOCKER_IMAGES.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orchestrator/app/views/main_view.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kube-deployment.yml" beforeDir="false" afterPath="$PROJECT_DIR$/kube-deployment.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orchestrator/app/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/orchestrator/app/views/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orchestrator/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/orchestrator/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service_01/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/service_01/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service_02/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/service_02/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +64,8 @@
       <option name="presentableId" value="Default" />
       <updated>1576162145795</updated>
       <workItem from="1576162155060" duration="773000" />
-      <workItem from="1576163938921" duration="4717000" />
+      <workItem from="1576163938921" duration="5267000" />
+      <workItem from="1576180146366" duration="488000" />
     </task>
     <servers />
   </component>
@@ -87,9 +81,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="397" y="199" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1576164290117" />
-    <state x="573" y="371" key="com.intellij.ide.util.TipDialog" timestamp="1576162182832">
-      <screen x="0" y="23" width="1792" height="1031" />
+    <state x="573" y="378" key="com.intellij.ide.util.TipDialog" timestamp="1576180147215">
+      <screen x="0" y="0" width="1792" height="1120" />
     </state>
+    <state x="573" y="378" key="com.intellij.ide.util.TipDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1576180147215" />
     <state x="573" y="371" key="com.intellij.ide.util.TipDialog/0.23.1792.1031@0.23.1792.1031" timestamp="1576162182832" />
   </component>
 </project>
