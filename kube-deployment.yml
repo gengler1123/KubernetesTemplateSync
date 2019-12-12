@@ -1,0 +1,141 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  labels:
+    app: template-db
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+      name: tempate-db
+  selector:
+    app: template-db
+  clusterIP: None
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: template-db
+  labels:
+    app: template-db
+spec:
+  template:
+    metadata:
+      labels:
+        app: template-db
+    spec:
+      containers:
+      - name: template-db
+        image: gengler1123/template_psql
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5432
+          name: template-db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-01
+  labels:
+    app: service-01-api
+spec:
+  ports:
+    - port: 8000
+      targetPort: 8000
+      name: service-01
+  selector:
+    app: service-01-api
+  clusterIP: None
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: service-01
+  labels:
+    app: service-01-api
+spec:
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: service-01-api
+    spec:
+      containers:
+      - name: service-01
+        image: gengler1123/template_service_01
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-02
+  labels:
+    app: service-02-api
+spec:
+  ports:
+    - port: 8000
+      targetPort: 8000
+      name: service-02
+  selector:
+    app: service-02-api
+  clusterIP: None
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: service-02
+  labels:
+    app: service-02-api
+spec:
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: service-02-api
+    spec:
+      containers:
+      - name: service-02
+        image: gengler1123/template_service_02
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          name: api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orch
+  labels:
+    app: orch-api
+spec:
+  ports:
+    - port: 8082
+      targetPort: 8000
+      name: orch
+  selector:
+    app: orch-api
+  type: LoadBalancer
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: orch
+  labels:
+    app: orch-api
+spec:
+  template:
+    metadata:
+      labels:
+        app: orch-api
+    spec:
+      containers:
+      - name: orch
+        image: gengler1123/template_orchestrator
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          name: orch-api
