@@ -6,6 +6,10 @@ services:
     build: db
     image: gengler1123/template_psql
 
+  redis:
+    build: redis
+    image: gengler1123/template_redis
+
   orchestrator:
     build: orchestrator
     image: gengler1123/template_orchestrator
@@ -16,10 +20,10 @@ services:
     build: service_01
     image: gengler1123/template_service_01
     ports:
-     - "8080:80"
+     - "8080:9001"
 
   service_02:
     build: service_02
     image: gengler1123/template_service_02
     ports:
-      - "8080:80"
+      - "8080:9002"

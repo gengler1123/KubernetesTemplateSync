@@ -1,38 +1,91 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: db
+  name: psql
   labels:
-    app: template-db
+    app: template-psql
 spec:
   ports:
     - port: 5432
       targetPort: 5432
-      name: tempate-db
+      name: tempate-psql
   selector:
-    app: template-db
+    app: template-psql
+    tier: database
   clusterIP: None
+
+
 ---
+
+
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: template-db
+  name: psql
   labels:
-    app: template-db
+    app: template-psql
 spec:
   template:
     metadata:
       labels:
-        app: template-db
+        app: template-psql
     spec:
       containers:
-      - name: template-db
+      - name: psql
         image: gengler1123/template_psql
         imagePullPolicy: Always
         ports:
         - containerPort: 5432
-          name: template-db
+          name: psql
+
+
 ---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  labels:
+    app: template-redis
+spec:
+  ports:
+    - port: 6379
+      targetPort: 6379
+      name: tempate-redis
+  selector:
+    app: template-redis
+    tier: database
+  clusterIP: None
+
+
+---
+
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: template-redis
+  labels:
+    app: template-redis
+spec:
+  template:
+    metadata:
+      labels:
+        app: template-redis
+    spec:
+      containers:
+      - name: template-redis
+        image: gengler1123/template_redis
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 6379
+          name: template-redis
+
+
+---
+
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -46,8 +99,13 @@ spec:
       name: service-01
   selector:
     app: service-01-api
+    tier: backend
   clusterIP: None
+
+
 ---
+
+
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -68,7 +126,11 @@ spec:
         ports:
         - containerPort: 8080
           name: api
+
+
 ---
+
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -82,8 +144,13 @@ spec:
       name: service-02
   selector:
     app: service-02-api
+    tier: backend
   clusterIP: None
+
+
 ---
+
+
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -104,7 +171,11 @@ spec:
         ports:
         - containerPort: 8000
           name: api
+
+
 ---
+
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -118,8 +189,13 @@ spec:
       name: orch
   selector:
     app: orch-api
+    tier: backend
   type: LoadBalancer
+
+
 ---
+
+
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -127,6 +203,7 @@ metadata:
   labels:
     app: orch-api
 spec:
+  replicas: 5
   template:
     metadata:
       labels:
@@ -137,10 +214,12 @@ spec:
         image: gengler1123/template_orchestrator
         imagePullPolicy: Always
         env:
-          - name: service_01
+          - name: SERVICE_01_ENDPOINT
             value: "http://service-01:8000"
-          - name: service_02
+          - name: SERVICE_02_ENDPOINT
             value: "http://service-02:8000"
+          - name: REDIS_ENDPOINT
+            value: "redis"
         ports:
         - containerPort: 8000
           name: orch-api

@@ -8,7 +8,7 @@ def heartbeat():
     return json.dumps(
         {
             "status": True,
-            "service": "Homework_Template",
-            "datetime": f"{datetime.now()}"
+            "service": "Service_02",
+            "timestamp": f"{datetime.now()}"
         }
     )
