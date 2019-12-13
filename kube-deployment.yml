@@ -11,7 +11,6 @@ spec:
       name: tempate-psql
   selector:
     app: template-psql
-    tier: database
   clusterIP: None
 
 
@@ -58,7 +57,6 @@ spec:
       name: tempate-redis
   selector:
     app: template-redis
-    tier: database
   clusterIP: None
 
 
@@ -102,7 +100,6 @@ spec:
       name: service-01
   selector:
     app: service-01-api
-    tier: backend
   clusterIP: None
 
 
@@ -147,7 +144,6 @@ spec:
       name: service-02
   selector:
     app: service-02-api
-    tier: backend
   clusterIP: None
 
 
@@ -192,7 +188,6 @@ spec:
       name: orch
   selector:
     app: orch-api
-    tier: backend
   type: LoadBalancer
 
 
@@ -206,7 +201,7 @@ metadata:
   labels:
     app: orch-api
 spec:
-  replicas: 5
+  replicas: 1
   template:
     metadata:
       labels:
@@ -226,7 +221,7 @@ spec:
           - name: PSQL_HOST
             value: "psql"
           - name: PSQL_PORT
-            value: 5432
+            value: "5432"
           - name: PSQL_USER
             value: "postgres"
           - name: PSQL_PASS
