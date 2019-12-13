@@ -2,3 +2,4 @@ flask
 requests
 uwsgi
 redis
+psycopg2-binary
