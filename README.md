@@ -26,6 +26,7 @@ Running
 ```shell script
 ./DOCKER_IMAGES.sh
 ```
+
 will build and push the docker images to be used, it is currently setup to push to my personal
 repo, which you probably don't have access to.  This should also probably get moved to 
 using environment variables.

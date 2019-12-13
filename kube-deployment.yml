@@ -34,6 +34,9 @@ spec:
       - name: psql
         image: gengler1123/template_psql
         imagePullPolicy: Always
+        env:
+          - name: POSTGRES_PASSWORD
+            value: password
         ports:
         - containerPort: 5432
           name: psql
@@ -220,6 +223,14 @@ spec:
             value: "http://service-02:8000"
           - name: REDIS_ENDPOINT
             value: "redis"
+          - name: PSQL_HOST
+            value: "psql"
+          - name: PSQL_PORT
+            value: 5432
+          - name: PSQL_USER
+            value: "postgres"
+          - name: PSQL_PASS
+            value: "password"
         ports:
         - containerPort: 8000
           name: orch-api

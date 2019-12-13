@@ -11,19 +11,37 @@ def main_view():
     """
 
     """
-    r1 = get("http://service-01:8000/heartbeat")
+    service_01_endpoint = environ.get("SERVICE_01_ENDPOINT", "http://service-01:8000")
+    service_02_endpoint = environ.get("SERVICE_02_ENDPOINT", "http://service-02:8000")
+    redis_endpoint = environ.get("REDIS_ENDPOINT")
+    psql_host = environ.get("PSQL_HOST")
+    psql_port = environ.get("PSQL_PORT")
+    psql_user = environ.get("PSQL_USER")
+    psql_pass = environ.get("PSQL_PASS")
+
+    print(f"""
+    {service_01_endpoint}
+    {service_02_endpoint}
+    {redis_endpoint}
+    {psql_host}
+    {psql_port}
+    {psql_user}
+    {psql_pass}
+""")
+
+    r1 = get(f"{service_01_endpoint}/heartbeat")
     if r1.status_code != 200:
         r1_resp = r1.text
     else:
         r1_resp = r1.json()
-    r2 = get("http://service-02:8000/heartbeat")
+    r2 = get(f"{service_02_endpoint}/heartbeat")
     if r2.status_code != 200:
         r2_resp = r2.text
     else:
         r2_resp = r2.json()
 
     try:
-        r = redis.StrictRedis(host=environ.get("REDIS_ENDPOINT"))
+        r = redis.StrictRedis(host=redis_endpoint)
         print("Redis Keys")
         print(r.keys())
         values = r.keys()
